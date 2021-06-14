@@ -17,34 +17,18 @@ function App() {
 const btn = document.querySelector(".App-btn"),
       weather = document.querySelector(".App-weather");
 
-      function getWeather(){
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=Barselona&appid=dd6be90a16121aee247f2cb12a37afb2&units=metric`
+    async function getWeather(){
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=Barselona&appid=dd6be90a16121aee247f2cb12a37afb2&units`
         
-        const data = fetch(url).then(
-          result => result.json()
-        )    
-        
+        const response = await fetch(url);
+        const data = await response.json();
+           
         weather.textContent = `${data.main.temp.toFixed(0)}ºC`;
       }
-/*
-function getWeather(){
-
-    let response = fetch("https://api.openweathermap.org/data/2.5/weather?q=Barselona&appid=dd6be90a16121aee247f2cb12a37afb2")
-    
-    let data = response.json()
-
-      weather.textContent = `${data.main.temp.toFixed(0)}ºC`;
-
-}
-*/
 
 getWeather();
 
-btn.addEventListener("click", (e) => {
-  e.preventDefault();
-  
-  getWeather();
-})
+btn.addEventListener("click", getWeather)
 
 
 export default App;
